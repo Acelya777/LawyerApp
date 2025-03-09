@@ -13,6 +13,21 @@
         android:theme="@style/Theme.LawyerApp"
         tools:targetApi="31">
         <activity
+            android:name=".Finance"
+            android:exported="false" />
+        <activity
+            android:name=".ClientManagement"
+            android:exported="false" />
+        <activity
+            android:name=".Calendar"
+            android:exported="false" />
+        <activity
+            android:name=".ContratManagement"
+            android:exported="false" />
+        <activity
+            android:name=".CaseManagement"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
