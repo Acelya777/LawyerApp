@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LawyerApp"
         tools:targetApi="31">
         <activity
+            android:name=".Reminder"
+            android:exported="false" />
+        <activity
             android:name=".Finance"
             android:exported="false" />
         <activity

@@ -154,7 +154,7 @@
                     android:src="@drawable/rounded_attach_email_24"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Ekle"/>
+                    android:contentDescription="Email"/>
                 <ImageButton
                     android:id="@+id/HomeSettingImageButton"
                     android:layout_width="48dp"
@@ -164,7 +164,7 @@
                     android:src="@drawable/round_app_settings_alt_24"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Ekle"/>
+                    android:contentDescription="Setting"/>
                 <ImageButton
                     android:id="@+id/HomeEmailChatBotButton"
                     android:layout_width="48dp"
@@ -174,7 +174,7 @@
                     android:src="@drawable/sharp_3p_24"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Ekle"/>
+                    android:contentDescription="ChatBot"/>
             </LinearLayout>
 
 

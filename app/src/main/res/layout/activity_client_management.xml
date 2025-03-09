@@ -13,11 +13,212 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize">
-        <TextView
+        <ScrollView
+            android:id="@+id/ClientManagementView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Müvekkil Yönetimi"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Müvekkil Kayıt"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/baseline_account_circle_24"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    tools:ignore="MissingClass" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ad"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Ad"
+                        android:inputType="textPersonName"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Soyad"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Soyad"
+                        android:inputType="textPersonName"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Email"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Telefon Numarası"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Tel.No."
+                        android:inputType="phone"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TC Kimlik Numarası"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="TC No."
+                        android:inputType="number"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="İl"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/ClientCitySpinner"
+                        android:layout_marginBottom="20dp"
+                        android:background="@android:color/white"
+                        android:padding="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Adres"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_vertical" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Adres"
+                        android:inputType="textMultiLine"
+                        android:background="@android:color/white"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/kaydetButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/logText"
+                    android:text="Kaydet"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

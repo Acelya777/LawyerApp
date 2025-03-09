@@ -12,12 +12,52 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
-        <TextView
+        android:paddingTop="?attr/actionBarSize"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Takvim"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Etkinlikler"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:padding="8dp" />
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="Etkinlik adı: Dava duruşması, Tarih: 10 Mart 2025, Saat: 10:00"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:gravity="bottom">
+                <ImageButton
+                    android:id="@+id/CalenderReminderButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="5dp"
+                    android:textAlignment="center"
+                    android:src="@drawable/baseline_add_24"
+                    android:scaleType="centerCrop"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Hatırlatıcı"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
