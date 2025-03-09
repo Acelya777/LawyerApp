@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LawyerApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_cardView_textView_title_sendData">Send Data</string>
+    <string name="main_cardView_textView_title_getData">Get Data</string>
+    <string name="sendAct_textView_sendData_title">Title</string>
+    <string name="sendAct_textView_sendData_title1">Description</string>
+    <string name="getAct_textView_getData_title">Title</string>
+    <string name="sendAct_Button_sendData">Upload</string>
+
+</resources>

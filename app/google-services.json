@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "935142588519",
+    "project_id": "lawyerapp-6b018",
+    "storage_bucket": "lawyerapp-6b018.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935142588519:android:6f2e00122a6898aca514c2",
+        "android_client_info": {
+          "package_name": "com.acelya.lawyerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiEKqP1YJEdXTgNCmfnb0bjYOVyZK55es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

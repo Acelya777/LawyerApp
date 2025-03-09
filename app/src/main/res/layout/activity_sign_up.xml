@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/RegisterLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="start"
+                    android:padding="24dp"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kayıt Ol"
+                        android:layout_marginTop="5dp"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/logText"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="24dp"/>
+                    <EditText
+                        android:id="@+id/RegisterName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ad"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterSurname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Soyad"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterTC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="TC Kimlik No"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Telefon"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="phone"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="E-posta"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textEmailAddress"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Parola"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPassword"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+                    <EditText
+                        android:id="@+id/RegisterPasswordRepeat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Parola Tekrarı"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPassword"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterOfficeNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Büro No"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:id="@+id/RegisterRegistrationNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Sicil No"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baro İl"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <Spinner
+                            android:id="@+id/RegisterSpecializationSpinnerCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Uzmanlık Alanları"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <Spinner
+                            android:id="@+id/RegisterSpecializationSpinnerBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/RegisterButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kayıt Ol"
+                        android:textSize="18sp"
+                        android:backgroundTint="@color/logText"
+                        android:textColor="@android:color/white"
+                        android:padding="12dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
