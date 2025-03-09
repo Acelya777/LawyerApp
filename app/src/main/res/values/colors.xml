@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#F5F5F5</color>
     <color name="logText">#003366</color>
+    <color name="test">#1111111</color>
 </resources>
