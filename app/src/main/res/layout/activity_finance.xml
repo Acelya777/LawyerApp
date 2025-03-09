@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Calendar">
+    tools:context=".Finance">
     <include
         layout="@layout/tool_bar" />
     <RelativeLayout
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Takvim"
+            android:text="Finans"
             android:textSize="25sp"
             android:textColor="@color/black"/>
     </RelativeLayout>

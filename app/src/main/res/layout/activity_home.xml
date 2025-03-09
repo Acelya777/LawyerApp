@@ -15,79 +15,8 @@
     android:layout_height="match_parent"
     tools:context=".Home"
     android:orientation="vertical">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        android:elevation="4dp"
-        tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:gravity="center_vertical">
-
-            <!-- Kullanıcı Bilgileri -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/baseline_account_circle_24"
-                    android:contentDescription="Profil Resmi"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kullanıcı Adı"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="Bulunulan Sayfa"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/outline_subdirectory_arrow_left_24"
-                    android:contentDescription="Çıkış" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Çıkış"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
+        <include
+            layout="@layout/tool_bar" />
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -115,6 +44,7 @@
                 android:orientation="vertical"
                 android:gravity="start">
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/CaseManagementCardView"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:padding="10dp"
@@ -132,6 +62,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/ContratManagementCardView"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:padding="10dp"
@@ -150,6 +81,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/CalenderCardView"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:padding="10dp"
@@ -168,6 +100,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/FinanceCardView"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:padding="10dp"
@@ -186,6 +119,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/ClientManagement"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:padding="10dp"
