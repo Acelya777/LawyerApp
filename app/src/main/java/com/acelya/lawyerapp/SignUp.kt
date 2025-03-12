@@ -1,6 +1,7 @@
 package com.acelya.lawyerapp
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
@@ -21,6 +22,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.acelya.lawyerapp.databinding.ActivitySignUpBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import java.util.UUID
 
 class SignUp : AppCompatActivity() {
     private val binding by lazy {
@@ -34,6 +42,7 @@ class SignUp : AppCompatActivity() {
         val itemSpinnerBar = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerBar)
         val itemSpinnerCity = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity)
         val registerButton = findViewById<Button>(R.id.RegisterButton)
+
 
         val spinnerOptionsBar = arrayListOf("Seçiniz", "Ceza Hukuku", "Boşanma Hukuku", "İcra Hukuku", "Gayrimenkul Hukuku", "Ticaret Hukuku", "Diğer")
         val adapterBar = CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, spinnerOptionsBar)
@@ -93,6 +102,7 @@ class SignUp : AppCompatActivity() {
                 }
             }
 
+
             validateField(name, "Ad alanı boş olamaz")
             validateField(surname, "Soyad alanı boş olamaz")
             validateField(tc, "TC Kimlik No alanı boş olamaz")
@@ -114,11 +124,20 @@ class SignUp : AppCompatActivity() {
                 isValid = false
             }
 
-            if (isValid) {
-                // Tüm alanlar doluysa devam et
-                Toast.makeText(this, "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
+            if(password.text.toString() != passwordRepeat.text.toString()){
+                Toast.makeText(this, "Şifreler Uyuşmuyor! $password,$passwordRepeat", Toast.LENGTH_SHORT).show()
+                validateField(password, "Tekrar giriniz!")
+                validateField(passwordRepeat, "Tekrar giriniz!")
+
+            }else{
+                if (isValid) {
+                    getRegisterLawyer()
+                    Toast.makeText(this, "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
+
+
 
     }
     class CustomSpinnerAdapter(context: Context, resource: Int, objects: List<String>) :
@@ -144,4 +163,114 @@ class SignUp : AppCompatActivity() {
         layoutParams.bottomMargin = margin
         loginLayoutT.layoutParams = layoutParams
     }
+
+    fun getNextLawyerId(callback: (Int) -> Unit){
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("Lawyers")
+            .orderBy("lawyerId", Query.Direction.DESCENDING)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                val lastId = if(!documents.isEmpty){
+                    documents.documents[0].getLong("lawyerId")?.toInt() ?: 0
+                } else {
+                    0
+                }
+                callback(lastId + 1)
+            }
+            .addOnFailureListener { e ->
+                callback(1)
+            }
+    }
+
+    fun getRegisterLawyer() {
+        val name = findViewById<EditText>(R.id.RegisterName).text.toString().trim()
+        val surname = findViewById<EditText>(R.id.RegisterSurname).text.toString().trim()
+        val tc = findViewById<EditText>(R.id.RegisterTC).text.toString().trim()
+        val phone = findViewById<EditText>(R.id.RegisterPhone).text.toString().trim()
+        val email = findViewById<EditText>(R.id.RegisterEmail).text.toString().trim()
+        val password = findViewById<EditText>(R.id.RegisterPassword).text.toString()
+        val passwordRepeat = findViewById<EditText>(R.id.RegisterPasswordRepeat).text.toString()
+        val officeNo = findViewById<EditText>(R.id.RegisterOfficeNumber).text.toString().trim()
+        val registrationNo = findViewById<EditText>(R.id.RegisterRegistrationNumber).text.toString().trim()
+        val city = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity).selectedItem.toString()
+        val specialization = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerBar).selectedItem.toString()
+
+        // Şifre eşleşme kontrolü
+        if (password != passwordRepeat) {
+            Toast.makeText(this, "Şifreler uyuşmuyor!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Boş alan kontrolü
+        if (name.isEmpty() || surname.isEmpty() || tc.isEmpty() || phone.isEmpty() ||
+            email.isEmpty() || password.isEmpty() || officeNo.isEmpty() || registrationNo.isEmpty()
+        ) {
+            Toast.makeText(this, "Lütfen tüm alanları doldurun!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        registerLawyer(email, password, name, surname, phone, city, specialization, officeNo, registrationNo, tc)
+    }
+
+    fun registerLawyer(
+        email: String,
+        password: String,
+        name: String,
+        surname: String,
+        phone: String,
+        city: String,
+        specialization: String,
+        officeNumber: String,
+        registrationNumber: String,
+        tc: String
+    ) {
+        val auth = FirebaseAuth.getInstance()
+        val database = FirebaseDatabase.getInstance().reference.child("LawyersTable")
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val userId = task.result?.user?.uid
+
+                    if (userId != null) {
+                        val lawyerData = mapOf(
+                            "lawyerId" to userId,
+                            "name" to name,
+                            "surname" to surname,
+                            "email" to email,
+                            "phone" to phone,
+                            "city" to city,
+                            "specialization" to specialization,
+                            "officeNumber" to officeNumber,
+                            "registrationNumber" to registrationNumber,
+                            "tc" to tc
+                        )
+
+                        database.child(userId).setValue(lawyerData)
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this@SignUp, "Kayıt başarılı!", Toast.LENGTH_SHORT
+                                ).show()
+
+                                // Giriş ekranına yönlendir
+                                val intent = Intent(this@SignUp, LogIn::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(
+                                    this@SignUp, "Veritabanına eklenirken hata oluştu: ${e.message}", Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    } else {
+                        Toast.makeText(this@SignUp, "Kullanıcı kimliği alınamadı!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@SignUp, "Kayıt başarısız: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 }

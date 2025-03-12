@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.acelya.lawyerapp.databinding.ActivityLogInBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -62,9 +63,8 @@ class LogIn : AppCompatActivity() {
             validateField(LawUsername,"Email Boş Olamaz")
             validateField(LawPassword,"Password Boş Olamaz")
 
-            val intent = Intent(this@LogIn, Home::class.java)
-            startActivity(intent)
-            //checkUserCredentials(LUsername, LPassword)
+//            checkUserCredentials(LUsername, LPassword)
+            loginLawyer()
         }
 
         binding.RegisterCardView.setOnClickListener {
@@ -114,4 +114,54 @@ class LogIn : AppCompatActivity() {
         layoutParams.bottomMargin = margin
         loginLayoutT.layoutParams = layoutParams
     }
+    fun loginLawyer() {
+        val emailInput = findViewById<EditText>(R.id.LawUsername).text.toString().trim()
+        val passwordInput = findViewById<EditText>(R.id.LawPassword).text.toString().trim()
+
+        if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+            Toast.makeText(this, "E-posta ve şifre boş olamaz!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val database = FirebaseDatabase.getInstance().reference.child("LawyersTable")
+
+        database.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                var found = false  // Avukat bulundu mu?
+
+                for (lawyer in snapshot.children) {
+                    val email = lawyer.child("email").value.toString()
+                    val password = lawyer.child("password").value.toString()
+
+                    if (email == emailInput && password == passwordInput) {
+                        found = true
+                        val name = lawyer.child("name").value.toString()
+                        val specialization = lawyer.child("specialization").value.toString()
+
+                        Toast.makeText(this, "Hoş geldiniz, $name!", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(this, Home::class.java)
+                        val sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                        val editor = sharedPref.edit()
+                        editor.putString("lawyerName", name)
+                        editor.apply()
+                        startActivity(intent)
+                        finish()
+                        break
+                    }
+                }
+
+                if (!found) {
+                    Toast.makeText(this, "E-posta veya şifre hatalı!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Veritabanında kayıtlı avukat bulunamadı!", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { e ->
+            Toast.makeText(this, "Veri çekme hatası: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
 }
