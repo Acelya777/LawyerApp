@@ -11,5 +11,10 @@ class CaseManagement : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_case_management)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ToolbarFragment())
+                .commit()
+        }
     }
 }

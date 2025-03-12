@@ -1,26 +1,41 @@
 package com.acelya.lawyerapp
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.acelya.lawyerapp.SignUp.CustomSpinnerAdapter
+import com.google.firebase.database.FirebaseDatabase
 
 class ClientManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_client_management)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ToolbarFragment())
+                .commit()
+        }
         val rootView = findViewById<View>(android.R.id.content)
         val clientSpinnerCity = findViewById<Spinner>(R.id.ClientCitySpinner)
+        val clientUploadBtn = findViewById<Button>(R.id.ClientUploadButton)
+
+        clientUploadBtn.setOnClickListener {
+            setClientInfo()
+        }
 
         val spinnerOptionsCity = arrayListOf("Seçiniz", "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara",
             "Antalya", "Ardahan", "Artvin", "Aydın", "Balıkesir", "Bartın", "Batman", "Bayburt",
@@ -58,5 +73,40 @@ class ClientManagement : AppCompatActivity() {
         val layoutParams = loginLayoutT.layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.bottomMargin = margin
         loginLayoutT.layoutParams = layoutParams
+    }
+    fun setClientInfo(){
+        val name = findViewById<EditText>(R.id.ClientName).text.toString()
+        val surname = findViewById<EditText>(R.id.ClientSurname).text.toString()
+        val tc = findViewById<EditText>(R.id.ClientTC).text.toString()
+        val phone = findViewById<EditText>(R.id.ClientPhone).text.toString()
+        val email = findViewById<EditText>(R.id.ClientEmail).text.toString()
+        val address = findViewById<EditText>(R.id.ClientAddress).text.toString()
+        val city = findViewById<Spinner>(R.id.ClientCitySpinner).selectedItem.toString()
+
+        val database = FirebaseDatabase.getInstance()
+        val reference = database.getReference("ClientTable")
+
+        val clientId = reference.push().key ?: return
+
+        val client = hashMapOf(
+            "clientId" to clientId,
+            "name" to name,
+            "surname" to surname,
+            "tc" to tc,
+            "phone" to phone,
+            "email" to email,
+            "address" to address,
+            "city" to city,
+        )
+
+        reference.child(clientId).setValue(client)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Kayıt başarılı! ID: $clientId", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this,LogIn::class.java)
+                startActivity(intent)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Hata: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

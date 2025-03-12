@@ -2,7 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ToolBar"
+    android:layout_marginTop="10dp">
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -34,7 +37,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/baseline_account_circle_24"
+                        android:src="@drawable/face_4_24px"
                         android:contentDescription="Profil Resmi"
                         android:layout_marginEnd="8dp" />
 
@@ -61,23 +64,18 @@
                     android:id="@+id/ToolBarLogout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/outline_subdirectory_arrow_left_24"
-                        android:contentDescription="Çıkış" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/logout_24px"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Çıkış"
+                        app:tint="@color/black"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Çıkış"
-                        android:textSize="12sp"
-                        android:textColor="@color/black"
-                        android:gravity="center"/>
                 </LinearLayout>
 
             </LinearLayout>

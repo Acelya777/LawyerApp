@@ -7,22 +7,18 @@
     android:id="@+id/drawerLayoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    <include
+        layout="@layout/tool_bar" />
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home"
     android:orientation="vertical">
-        <include
-            layout="@layout/tool_bar" />
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize">
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -151,35 +147,34 @@
                     android:layout_height="48dp"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
-                    android:src="@drawable/rounded_attach_email_24"
+                    android:src="@drawable/mail_24px"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Email"/>
+                    android:contentDescription="Email"
+                    app:tint="@color/black"/>
                 <ImageButton
                     android:id="@+id/HomeSettingImageButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
-                    android:src="@drawable/round_app_settings_alt_24"
+                    android:src="@drawable/settings_24px"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Setting"/>
+                    android:contentDescription="Setting"
+                    app:tint="@color/black"/>
                 <ImageButton
                     android:id="@+id/HomeEmailChatBotButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
-                    android:src="@drawable/sharp_3p_24"
+                    android:src="@drawable/forum_24px"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="ChatBot"/>
+                    android:contentDescription="ChatBot"
+                    app:tint="@color/black"/>
             </LinearLayout>
-
-
-
-
         </LinearLayout>
     </RelativeLayout>
 

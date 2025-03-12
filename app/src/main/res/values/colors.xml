@@ -1,7 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="background">#F5F5F5</color>
     <color name="logText">#003366</color>
+
+    <!-- Ana Renkler -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="dark_gray">#A9A9A9</color>
+
+    <!-- Mavi Tonları -->
+    <color name="blue">#2196F3</color>
+    <color name="light_blue">#87CEEB</color>
+    <color name="dark_blue">#0D47A1</color>
+    <color name="sky_blue">#00BFFF</color>
+    <color name="navy_blue">#000080</color>
+
+    <!-- Kırmızı Tonları -->
+    <color name="red">#F44336</color>
+    <color name="light_red">#FFCDD2</color>
+    <color name="dark_red">#B71C1C</color>
+    <color name="crimson">#DC143C</color>
+    <color name="maroon">#800000</color>
+
+    <!-- Yeşil Tonları -->
+    <color name="green">#4CAF50</color>
+    <color name="light_green">#8BC34A</color>
+    <color name="dark_green">#1B5E20</color>
+    <color name="lime_green">#32CD32</color>
+    <color name="teal">#008080</color>
+
+    <!-- Sarı ve Turuncu Tonları -->
+    <color name="yellow">#FFEB3B</color>
+    <color name="light_yellow">#FFF9C4</color>
+    <color name="dark_yellow">#FBC02D</color>
+    <color name="orange">#FF9800</color>
+    <color name="dark_orange">#E65100</color>
+
+    <!-- Mor Tonları -->
+    <color name="purple">#9C27B0</color>
+    <color name="light_purple">#E1BEE7</color>
+    <color name="dark_purple">#4A148C</color>
+    <color name="magenta">#FF00FF</color>
+
+    <!-- Kahverengi Tonları -->
+    <color name="brown">#795548</color>
+    <color name="light_brown">#A1887F</color>
+    <color name="dark_brown">#3E2723</color>
+
+    <!-- Pembe Tonları -->
+    <color name="pink">#E91E63</color>
+    <color name="light_pink">#FFB6C1</color>
+    <color name="hot_pink">#FF69B4</color>
+
 </resources>

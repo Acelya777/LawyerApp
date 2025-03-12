@@ -183,7 +183,7 @@ class SignUp : AppCompatActivity() {
                 callback(1)
             }
     }
-
+    //FirebaseAuth Add
     fun getRegisterLawyer() {
         val name = findViewById<EditText>(R.id.RegisterName).text.toString().trim()
         val surname = findViewById<EditText>(R.id.RegisterSurname).text.toString().trim()
@@ -273,4 +273,47 @@ class SignUp : AppCompatActivity() {
             }
     }
 
+    //FirebaseDatabase Add
+    fun getRegisterLawyerFirst(){
+        val name = findViewById<EditText>(R.id.RegisterName).text.toString()
+        val surname = findViewById<EditText>(R.id.RegisterSurname).text.toString()
+        val tc = findViewById<EditText>(R.id.RegisterTC).text.toString()
+        val phone = findViewById<EditText>(R.id.RegisterPhone).text.toString()
+        val email = findViewById<EditText>(R.id.RegisterEmail).text.toString()
+        val password = findViewById<EditText>(R.id.RegisterPassword).text.toString()
+        val passwordRepeat = findViewById<EditText>(R.id.RegisterPasswordRepeat).text.toString()
+        val officeNo = findViewById<EditText>(R.id.RegisterOfficeNumber).text.toString()
+        val registrationNo = findViewById<EditText>(R.id.RegisterRegistrationNumber).text.toString()
+        val city = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity).selectedItem.toString()
+        val specialization = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerBar).selectedItem.toString()
+
+        val database = FirebaseDatabase.getInstance()
+        val reference = database.getReference("LawyersTable")
+
+        val lawyerId = reference.push().key ?: return
+
+        val lawyer = hashMapOf(
+            "lawyerId" to lawyerId,
+            "name" to name,
+            "surname" to surname,
+            "password" to password,
+            "tc" to tc,
+            "phone" to phone,
+            "email" to email,
+            "officeNumber" to officeNo,
+            "registrationNumber" to registrationNo,
+            "city" to city,
+            "specialization" to specialization
+        )
+
+        reference.child(lawyerId).setValue(lawyer)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Kayıt başarılı! ID: $lawyerId", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this,LogIn::class.java)
+                startActivity(intent)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Hata: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
 }

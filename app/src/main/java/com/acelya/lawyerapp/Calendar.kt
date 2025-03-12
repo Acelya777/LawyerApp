@@ -14,7 +14,11 @@ class Calendar : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_calendar)
         val calenderReminder = findViewById<ImageButton>(R.id.CalenderReminderButton)
-
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ToolbarFragment())
+                .commit()
+        }
         calenderReminder.setOnClickListener {
             val intent = Intent(this,Reminder::class.java)
             startActivity(intent)
