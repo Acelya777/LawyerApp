@@ -1,6 +1,7 @@
 package com.acelya.lawyerapp
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -69,8 +70,29 @@ class ClientAdapter(private var clientList: MutableList<Client>) :
                                 }
                             }
                         } else {
-                            // Eğer kullanıcıya ait dava yoksa uyarı göster
                             Toast.makeText(holder.itemView.context, "Bu kullanıcıya ait dava dosyası bulunamadı.", Toast.LENGTH_SHORT).show()
+
+                            // AlertDialog oluştur
+                            val builder = AlertDialog.Builder(holder.itemView.context)
+                            builder.setTitle("Dava Dosyası Yok")
+                            builder.setMessage("Bu kullanıcıya ait dava dosyası bulunamadı. Yeni bir dosya oluşturmak ister misiniz?")
+
+                            // "Evet" butonu
+                            builder.setPositiveButton("Evet") { dialog, which ->
+                                // Burada dosya oluşturma işlemi yapılacak
+                                val intent = Intent(holder.itemView.context, CreateCaseFile::class.java)
+                                intent.putExtra("clientId", client.clientId)  // clientId'yi yeni sayfaya gönder
+                                holder.itemView.context.startActivity(intent)
+                            }
+
+                            // "Hayır" butonu
+                            builder.setNegativeButton("Hayır") { dialog, which ->
+                                // Dialogu kapat
+                                dialog.dismiss()
+                            }
+
+                            // Dialogu göster
+                            builder.show()
                         }
                     }
 

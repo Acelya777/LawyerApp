@@ -9,7 +9,6 @@
     <include
         layout="@layout/tool_bar" />
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
@@ -36,10 +35,13 @@
                     android:textStyle="bold"
                     android:padding="8dp" />
                 <TextView
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEvents"
                     android:layout_width="match_parent"
-                    android:text="Etkinlik adı: Dava duruşması, Tarih: 10 Mart 2025, Saat: 10:00"
-                    />
+                    android:layout_height="wrap_content"
+                    android:text="Seçilen günün etkinlikleri burada görünecek."
+                    android:textSize="16sp"
+                    android:padding="8dp"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"

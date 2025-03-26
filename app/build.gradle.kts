@@ -64,5 +64,4 @@ dependencies {
     implementation(libs.firebase.auth)
 
     implementation(libs.eventbus)
-
 }

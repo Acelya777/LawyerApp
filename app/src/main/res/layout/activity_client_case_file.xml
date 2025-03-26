@@ -6,28 +6,148 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClientCaseFile">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtCaseName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="Dava Adı"/>
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/txtCaseDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Dava detayları burada gösterilecek."
-            android:layout_marginTop="8dp"/>
+            <!-- Profil Bilgileri -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/face_4_24px"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Mehmet Yılmaz"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+
+                    <TextView
+                        android:text="Ticaret Hukuku"
+                        android:textSize="14sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:text="Aktif Dava"
+                    android:textColor="#00AA00"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- Müvekkil Bilgileri -->
+            <TextView
+                android:text="Müvekkil Bilgileri"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="Ad Soyad: Mehmet Yılmaz -\nTelefon: 0555 123 4567 -\nE-posta: mehmetyilmaz@example.com"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <!-- Dava Süreçleri -->
+            <TextView
+                android:text="Dava Süreçleri"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                android:text="10 Aralık 2024: İhtarname gönderildi\n15 Aralık 2024: İlk duruşma yapıldı\n5 Ocak 2025: Duruşma tarihi"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <!-- Belgeler -->
+            <TextView
+                android:text="Belgeler"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="İhtarname.pdf" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/upload_file_24px" />
+
+            </LinearLayout>
+
+            <!-- İşlemler -->
+            <TextView
+                android:text="İşlemler"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+            <Button
+                android:text="Yeni Belge Ekle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="Yüklü Belge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- Alt Butonlar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    android:text="Kaydet"
+                    android:backgroundTint="#00AA00"
+                    android:textColor="#FFFFFF"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <Button
+                    android:text="Duruşma Tarihi Ekle"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

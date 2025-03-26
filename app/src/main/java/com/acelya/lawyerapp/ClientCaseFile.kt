@@ -27,8 +27,7 @@ class ClientCaseFile : AppCompatActivity() {
                     val case = snapshot.getValue(CaseFile::class.java)
 
                     case?.let {
-                        findViewById<TextView>(R.id.txtCaseName).text = it.caseName
-                        findViewById<TextView>(R.id.txtCaseDetails).text = it.notes
+
                     }
                 } else {
                     Toast.makeText(this@ClientCaseFile, "Dava bulunamadı.", Toast.LENGTH_SHORT).show()
