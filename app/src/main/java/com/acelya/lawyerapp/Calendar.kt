@@ -14,14 +14,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.acelya.lawyerapp.databinding.ActivityCalendarBinding
 import com.acelya.lawyerapp.databinding.ActivityCreateCaseFileBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Calendar : AppCompatActivity() {
     private val binding by lazy {
         ActivityCalendarBinding.inflate(layoutInflater)
     }
-
-    private lateinit var db: FirebaseFirestore
 
     @SuppressLint("DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +62,6 @@ class Calendar : AppCompatActivity() {
                 .commit()
         }
 
-        db = FirebaseFirestore.getInstance()
 
         val calendarView: CalendarView = findViewById(R.id.calendarView)
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -69,37 +70,36 @@ class Calendar : AppCompatActivity() {
             Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show()
         }
 
+
     }
     private fun fetchEvent(date: String) {
-        val db = FirebaseFirestore.getInstance()
+        val database = FirebaseDatabase.getInstance()
+        val ref = database.getReference("CalenderTable").child(date)
 
-        db.collection("CalendarTable").document("events").get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val eventData = document.get(date) as? Map<*, *>
-                    if (eventData != null) {
-                        val eventName = eventData["eventName"] as? String ?: "Etkinlik yok"
-                        val eventTime = eventData["eventTime"] as? String ?: "Zaman belirtilmemiş"
-                        val eventDescription = eventData["eventDescription"] as? String ?: "Açıklama yok"
+        Log.d("FirebaseDebug", "Firebase'den çekilecek tarih: $date") // Debug için
 
-                        Log.d("FirestoreDebug", "Etkinlik bulundu: $eventName - $eventTime - $eventDescription")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val eventName = snapshot.child("eventName").getValue(String::class.java) ?: "Etkinlik yok"
+                    val eventTime = snapshot.child("eventTime").getValue(String::class.java) ?: "Zaman belirtilmemiş"
+                    val eventDescription = snapshot.child("eventDescription").getValue(String::class.java) ?: "Açıklama yok"
 
-                        val eventTextView = findViewById<TextView>(R.id.tvEvents)
-                        eventTextView.text = "📅 Etkinlik adı: $eventName\n⏰ Saat: $eventTime\n📌 Açıklama: $eventDescription"
-                    } else {
-                        Log.d("FirestoreDebug", "Bu tarihte etkinlik yok.")
-                        val eventTextView = findViewById<TextView>(R.id.tvEvents)
-                        eventTextView.text = "📌 Bu tarihte etkinlik bulunmamaktadır."
-                    }
+                    Log.d("FirebaseDebug", "Etkinlik bulundu: $eventName - $eventTime - $eventDescription")
+
+                    val eventTextView = findViewById<TextView>(R.id.tvEvents)
+                    eventTextView.text = "📅 Etkinlik adı: $eventName\n⏰ Saat: $eventTime\n📌 Açıklama: $eventDescription"
                 } else {
-                    Log.d("FirestoreDebug", "Etkinlik belgesi bulunamadı.")
+                    Log.d("FirebaseDebug", "Bu tarihte etkinlik yok: $date")
+                    val eventTextView = findViewById<TextView>(R.id.tvEvents)
+                    eventTextView.text = "📌 Bu tarihte etkinlik bulunmamaktadır."
                 }
             }
-            .addOnFailureListener { e ->
-                Log.e("FirestoreError", "Etkinlikler çekilemedi: ${e.message}")
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseError", "Etkinlikler çekilemedi: ${error.message}")
             }
+        })
     }
-
-
 
 }

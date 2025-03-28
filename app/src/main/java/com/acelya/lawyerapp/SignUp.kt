@@ -5,7 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
+import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -28,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import org.intellij.lang.annotations.Pattern
 import java.util.UUID
 
 class SignUp : AppCompatActivity() {
@@ -102,6 +106,33 @@ class SignUp : AppCompatActivity() {
                 }
             }
 
+            if(tc.length() != 11){
+                validateField(tc,"TC 11 karakterli olmalıdır!")
+            }
+
+            email.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if (p0 != null && !isValidEmail(p0.toString())) {
+                        email.error = "Geçersiz e-posta formatı"
+                    }
+                }
+            })
+
+            if (isValidEmail(email.text.toString())) {
+                // E-posta geçerli, işlem yap
+                Toast.makeText(this, "Geçerli e-posta!", Toast.LENGTH_SHORT).show()
+            } else {
+                // Hata mesajı göster
+                email.error = "Geçersiz e-posta formatı"
+            }
 
             validateField(name, "Ad alanı boş olamaz")
             validateField(surname, "Soyad alanı boş olamaz")
@@ -245,7 +276,8 @@ class SignUp : AppCompatActivity() {
                             "specialization" to specialization,
                             "officeNumber" to officeNumber,
                             "registrationNumber" to registrationNumber,
-                            "tc" to tc
+                            "tc" to tc,
+                            "password" to password
                         )
 
                         database.child(userId).setValue(lawyerData)
@@ -316,4 +348,9 @@ class SignUp : AppCompatActivity() {
                 Toast.makeText(this, "Hata: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun isValidEmail(email: String) : Boolean{
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
 }

@@ -37,7 +37,7 @@ class ClientAdapter(private var clientList: MutableList<Client>,private val lawy
 
     override fun onBindViewHolder(holder: ClientViewHolder, position: Int) {
         val client = clientList[position]
-        holder.userName.text = "$${client.name} ${client.surname}"
+        holder.userName.text = "${client.name} ${client.surname}"
         holder.lawCategory.text = client.city
 
         holder.btnDelete.setOnClickListener {
