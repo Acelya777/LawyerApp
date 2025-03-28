@@ -11,10 +11,20 @@ class Reminder : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_reminder)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val localActivity = "Hatırlatıcı"
+        val name = intent.getStringExtra("name")
+
+        //ToolBarFragment toolbar başlıkları gönderme
+        if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
         }
     }
 }

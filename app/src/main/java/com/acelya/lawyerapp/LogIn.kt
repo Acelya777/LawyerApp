@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.acelya.lawyerapp.databinding.ActivityLogInBinding
+import com.acelya.lawyerapp.models.Lawyers
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,7 +30,7 @@ class LogIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        val LawUsername = findViewById<EditText>(R.id.LawUsername)
+        val LawEmail = findViewById<EditText>(R.id.LawUsername)
         val LawPassword = findViewById<EditText>(R.id.LawPassword)
         val rootView = findViewById<View>(android.R.id.content)
         rootView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -57,13 +58,12 @@ class LogIn : AppCompatActivity() {
                     isValid = false
                 }
             }
-            val LUsername = binding.LawUsername.text.toString().trim()
+            val LEmail = binding.LawUsername.text.toString().trim()
             val LPassword = binding.LawPassword.text.toString().trim()
 
-            validateField(LawUsername,"Email Boş Olamaz")
+            validateField(LawEmail,"Email Boş Olamaz")
             validateField(LawPassword,"Password Boş Olamaz")
 
-//            checkUserCredentials(LUsername, LPassword)
             loginLawyer()
         }
 
@@ -76,36 +76,6 @@ class LogIn : AppCompatActivity() {
             val intent = Intent(this@LogIn,ForgotPassword::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun checkUserCredentials(username: String, password: String) {
-        val database = FirebaseDatabase.getInstance()
-        val lawyerRef = database.getReference("Lawyers")
-
-        lawyerRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val storedUsername = snapshot.child("Email").getValue(String::class.java)
-                    val storedPassword = snapshot.child("Password").getValue(Long::class.java) // Password Long olarak saklanmış
-
-                    if (storedUsername == username && storedPassword == password.toLong()) {
-                        Toast.makeText(this@LogIn, "Giriş başarılı!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LogIn, Home::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this@LogIn, "Kullanıcı adı veya şifre yanlış!", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this@LogIn, "Kullanıcı adı veya şifre bulunamadı!", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@LogIn, "Veritabanı hatası: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun setLayoutMargin(margin: Int) {
@@ -136,6 +106,7 @@ class LogIn : AppCompatActivity() {
                     if (email == emailInput && password == passwordInput) {
                         found = true
                         val name = lawyer.child("name").value.toString()
+                        val lawyerId = lawyer.child("lawyerId").value.toString()
                         val specialization = lawyer.child("specialization").value.toString()
 
                         Toast.makeText(this, "Hoş geldiniz, $name!", Toast.LENGTH_SHORT).show()
@@ -144,8 +115,11 @@ class LogIn : AppCompatActivity() {
                         val sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                         val editor = sharedPref.edit()
                         editor.putString("lawyerName", name)
+                        intent.putExtra("lawyerId", lawyerId)
+                        intent.putExtra("name", name)
                         editor.apply()
                         startActivity(intent)
+
                         finish()
                         break
                     }

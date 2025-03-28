@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ClientAdapter(private var clientList: MutableList<Client>) :
+class ClientAdapter(private var clientList: MutableList<Client>,private val lawyerId:String?,private val name:String?) :
     RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
 
     class ClientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,7 +37,7 @@ class ClientAdapter(private var clientList: MutableList<Client>) :
 
     override fun onBindViewHolder(holder: ClientViewHolder, position: Int) {
         val client = clientList[position]
-        holder.userName.text = "${client.name} ${client.surname}"
+        holder.userName.text = "$${client.name} ${client.surname}"
         holder.lawCategory.text = client.city
 
         holder.btnDelete.setOnClickListener {
@@ -64,7 +64,7 @@ class ClientAdapter(private var clientList: MutableList<Client>) :
                                 val case = caseSnapshot.getValue(CaseFile::class.java)
                                 case?.let {
                                     val intent = Intent(holder.itemView.context, ClientCaseFile::class.java)
-                                    intent.putExtra("caseId", it.caseId)  // Burada `caseId`'yi aktarıyoruz
+                                    intent.putExtra("caseId", it.caseId)
                                     holder.itemView.context.startActivity(intent)
                                     return  // İlk bulduğumuz dava için yönlendirme yaptık, döngüyü bitir
                                 }
@@ -82,6 +82,8 @@ class ClientAdapter(private var clientList: MutableList<Client>) :
                                 // Burada dosya oluşturma işlemi yapılacak
                                 val intent = Intent(holder.itemView.context, CreateCaseFile::class.java)
                                 intent.putExtra("clientId", client.clientId)  // clientId'yi yeni sayfaya gönder
+                                intent.putExtra("name", name)
+                                intent.putExtra("lawyerId", lawyerId)
                                 holder.itemView.context.startActivity(intent)
                             }
 

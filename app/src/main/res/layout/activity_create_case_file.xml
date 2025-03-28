@@ -143,6 +143,66 @@
                     android:focusable="false"
                     android:clickable="true"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <!-- Devam Ediyor CheckBox -->
+            <LinearLayout
+                android:id="@+id/cbOngoingLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tilEndDate"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <CheckBox
+                    android:id="@+id/checkboxOngoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Devam Ediyor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilEndDate" />
+
+            </LinearLayout>
+            <!-- Belgeler-->
+            <TextView
+                android:id="@+id/documents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belgeler"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/cbOngoingLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/uploadPdfLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/documents"
+                app:layout_constraintStart_toStartOf="parent">
+                <Button
+                    android:id="@+id/uploadPdfBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PDF Yükle"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/tilNotes"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <!-- Yüklenen PDF'nin adını göstermek için bir TextView -->
+                <TextView
+                    android:id="@+id/pdfNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seçilen PDF: Yok"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/uploadPdfBtn"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Notlar -->
             <TextView
@@ -153,7 +213,7 @@
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/tilEndDate"
+                app:layout_constraintTop_toBottomOf="@id/uploadPdfLayout"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -174,8 +234,9 @@
                     android:inputType="textMultiLine"
                     android:textColor="@android:color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <!-- Data Set Btn-->
             <Button
-                android:id="@+id/createCaseButton"
+                android:id="@+id/dataSetCaseFileBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dava Dosyasını Oluştur"
@@ -197,7 +258,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-        <!-- Dava Dosyasını Oluştur Butonu -->
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
 class Home : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,14 +42,22 @@ class Home : AppCompatActivity() {
         val calender = findViewById<CardView>(R.id.CalenderCardView)
         val clientManagement = findViewById<CardView>(R.id.ClientManagement)
         val finance = findViewById<CardView>(R.id.FinanceCardView)
-        val toolbarUsername = findViewById<TextView>(R.id.ToolBarUsername)
-        val toolbarLogoutLayout = findViewById<LinearLayout>(R.id.ToolBarLogout)
 
+        // Intent'ten gelen name değerini alıyoruz
+        val localActivity = "Ana sayfa"
+        val name = intent.getStringExtra("name")
+        val lawyerId = intent.getStringExtra("lawyerId")
 
-
+        //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ToolbarFragment())
+                .replace(R.id.fragment_container, fragment)
                 .commit()
         }
 //        // Çıkış butonunun tıklanması için event dinleyicisi ekle
@@ -64,22 +71,32 @@ class Home : AppCompatActivity() {
 //        }
         caseManagement.setOnClickListener {
             val intent = Intent(this@Home,CaseManagement::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
         contratManagement.setOnClickListener {
             val intent = Intent(this@Home,ContratManagement::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
         calender.setOnClickListener {
             val intent = Intent(this@Home,Calendar::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
         clientManagement.setOnClickListener {
             val intent = Intent(this@Home,ClientManagement::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
         finance.setOnClickListener {
             val intent = Intent(this@Home,Finance::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
             startActivity(intent)
         }
 

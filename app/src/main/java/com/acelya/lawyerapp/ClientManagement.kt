@@ -37,6 +37,22 @@ class ClientManagement : AppCompatActivity() {
             setClientInfo()
         }
 
+        val localActivity = "Müvekkil Yönetimi"
+        val name = intent.getStringExtra("name")
+
+        //ToolBarFragment toolbar başlıkları gönderme
+        if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        }
+
         val spinnerOptionsCity = arrayListOf("Seçiniz", "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara",
             "Antalya", "Ardahan", "Artvin", "Aydın", "Balıkesir", "Bartın", "Batman", "Bayburt",
             "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı",

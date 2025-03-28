@@ -44,6 +44,22 @@ class Calendar : AppCompatActivity() {
             insets
         }
 
+        val localActivity = "Takvim"
+        val name = intent.getStringExtra("name")
+
+        //ToolBarFragment toolbar başlıkları gönderme
+        if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        }
+
         db = FirebaseFirestore.getInstance()
 
         val calendarView: CalendarView = findViewById(R.id.calendarView)

@@ -26,8 +26,26 @@ class CaseManagement : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        clientAdapter = ClientAdapter(clientList)
+        val localActivity = "Dosya Yönetimi"
+        val name = intent.getStringExtra("name")
+        val lawyerId = intent.getStringExtra("lawyerId")
+
+        clientAdapter = ClientAdapter(clientList,lawyerId,name)
         recyclerView.adapter = clientAdapter
+
+
+        //ToolBarFragment toolbar başlıkları gönderme
+        if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        }
 
         fetchClients()
 

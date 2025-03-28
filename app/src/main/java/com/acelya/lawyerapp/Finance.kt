@@ -11,9 +11,19 @@ class Finance : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_finance)
+        val localActivity = "Finans Yönetimi"
+        val name = intent.getStringExtra("name")
+
+        //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ToolbarFragment())
+                .replace(R.id.fragment_container, fragment)
                 .commit()
         }
     }
