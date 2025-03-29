@@ -5,8 +5,10 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.acelya.lawyerapp.models.Client
@@ -16,9 +18,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class CaseManagement : AppCompatActivity() {
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var clientAdapter: ClientAdapter
     private val clientList = mutableListOf<Client>()
+    lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,6 +35,7 @@ class CaseManagement : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val lawyerId = intent.getStringExtra("lawyerId")
 
+        drawerLayout = findViewById(R.id.drawerLayoutCase)
         clientAdapter = ClientAdapter(clientList,lawyerId,name)
         recyclerView.adapter = clientAdapter
 
@@ -71,5 +77,9 @@ class CaseManagement : AppCompatActivity() {
                 Toast.makeText(this@CaseManagement, "Veri Alınamadı!", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun openDrawer(){
+        drawerLayout.openDrawer(GravityCompat.END)
     }
 }

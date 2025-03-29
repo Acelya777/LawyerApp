@@ -7,7 +7,17 @@ plugins {
 android {
     namespace = "com.acelya.lawyerapp"
     compileSdk = 35
+    packaging {
+        resources {
+            resources.excludes.add("META-INF/NOTICE.md")
+            resources.excludes.add("META-INF/LICENSE.md")
+            resources.excludes.add("META-INF/INDEX.LIST")
+            resources.excludes.add("META-INF/DEPENDENCIES")
+            resources.excludes.add("META-INF/io.netty.versions.properties")
 
+        }
+
+    }
     defaultConfig {
         applicationId = "com.acelya.lawyerapp"
         minSdk = 24
@@ -52,6 +62,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.drawerlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +76,8 @@ dependencies {
     implementation(libs.firebase.auth)
 
     implementation(libs.eventbus)
+
+    implementation(libs.android.mail)
+    implementation(libs.android.activation)
+
 }

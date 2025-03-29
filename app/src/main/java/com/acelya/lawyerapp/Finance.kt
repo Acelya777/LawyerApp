@@ -1,6 +1,8 @@
 package com.acelya.lawyerapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,5 +28,12 @@ class Finance : AppCompatActivity() {
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
+        val caseTest = findViewById<Button>(R.id.CaseTest)
+
+        caseTest.setOnClickListener {
+            val intent = Intent(this@Finance,CaseManagement::class.java)
+            startActivity(intent)
+        }
+
     }
 }

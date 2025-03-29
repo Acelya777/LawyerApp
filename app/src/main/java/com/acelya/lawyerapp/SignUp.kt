@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
@@ -32,12 +34,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import org.intellij.lang.annotations.Pattern
+import java.lang.StringBuilder
 import java.util.UUID
 
 class SignUp : AppCompatActivity() {
     private val binding by lazy {
         ActivitySignUpBinding.inflate(layoutInflater)
     }
+    private var isValid = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,6 +51,15 @@ class SignUp : AppCompatActivity() {
         val itemSpinnerCity = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity)
         val registerButton = findViewById<Button>(R.id.RegisterButton)
 
+        val name = findViewById<EditText>(R.id.RegisterName)
+        val surname = findViewById<EditText>(R.id.RegisterSurname)
+        val tc = findViewById<EditText>(R.id.RegisterTC)
+        val phone = findViewById<EditText>(R.id.RegisterPhone)
+        val email = findViewById<EditText>(R.id.RegisterEmail)
+        val password = findViewById<EditText>(R.id.RegisterPassword)
+        val passwordRepeat = findViewById<EditText>(R.id.RegisterPasswordRepeat)
+        val officeNumber = findViewById<EditText>(R.id.RegisterOfficeNumber)
+        val registrationNumber = findViewById<EditText>(R.id.RegisterRegistrationNumber)
 
         val spinnerOptionsBar = arrayListOf("Seçiniz", "Ceza Hukuku", "Boşanma Hukuku", "İcra Hukuku", "Gayrimenkul Hukuku", "Ticaret Hukuku", "Diğer")
         val adapterBar = CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, spinnerOptionsBar)
@@ -84,56 +97,91 @@ class SignUp : AppCompatActivity() {
             }
         })
 
+        // E-posta geçerliliği kontrolü
+        email.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null && !Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
+                    email.error = "Geçersiz e-posta formatı"
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        // TC kimlik numarası kontrolü
+        tc.filters = arrayOf(InputFilter.LengthFilter(11))
+        tc.inputType = InputType.TYPE_CLASS_NUMBER
+        tc.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length == 11) {
+                    tc.error = null
+                } else {
+                    tc.error = "TC kimlik numarası 11 haneli olmalıdır!"
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        phone.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // Şu an için herhangi bir işlem yapmıyoruz
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // Eğer metin başında "+90" yoksa, ekleyin
+                if (!charSequence.isNullOrEmpty() && !charSequence.startsWith("+90")) {
+                    phone.setText("+90" + charSequence.toString())
+                    phone.setSelection(phone.text.length)  // İmleci sona taşır
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                // Şu an için herhangi bir işlem yapmıyoruz
+            }
+        })
+
+        registrationNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Gereksiz kod
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Gereksiz kod
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null && (p0.length < 8 || p0.length > 10)) {
+                    registrationNumber.error = "Ofis Numarası 8-10 hane arasında olmalıdır!"
+                } else {
+                    registrationNumber.error = null
+                }
+            }
+        })
+
+        officeNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Gereksiz kod
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Gereksiz kod
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null && (p0.length < 6 || p0.length > 8)) {
+                    officeNumber.error = "Ofis Numarası 6-8 hane arasında olmalıdır!"
+                } else {
+                    officeNumber.error = null
+                }
+            }
+        })
+
+
         registerButton.setOnClickListener {
-            val name = findViewById<EditText>(R.id.RegisterName)
-            val surname = findViewById<EditText>(R.id.RegisterSurname)
-            val tc = findViewById<EditText>(R.id.RegisterTC)
-            val phone = findViewById<EditText>(R.id.RegisterPhone)
-            val email = findViewById<EditText>(R.id.RegisterEmail)
-            val password = findViewById<EditText>(R.id.RegisterPassword)
-            val passwordRepeat = findViewById<EditText>(R.id.RegisterPasswordRepeat)
-            val officeNumber = findViewById<EditText>(R.id.RegisterOfficeNumber)
-            val registrationNumber = findViewById<EditText>(R.id.RegisterRegistrationNumber)
-            val citySpinner = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity)
-            val specializationSpinner = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerBar)
+            isValid = true
 
-            var isValid = true
-
-            fun validateField(editText: EditText, errorMessage: String) {
-                if (editText.text.toString().trim().isEmpty()) {
-                    editText.error = errorMessage
-                    isValid = false
-                }
-            }
-
-            if(tc.length() != 11){
-                validateField(tc,"TC 11 karakterli olmalıdır!")
-            }
-
-            email.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                    if (p0 != null && !isValidEmail(p0.toString())) {
-                        email.error = "Geçersiz e-posta formatı"
-                    }
-                }
-            })
-
-            if (isValidEmail(email.text.toString())) {
-                // E-posta geçerli, işlem yap
-                Toast.makeText(this, "Geçerli e-posta!", Toast.LENGTH_SHORT).show()
-            } else {
-                // Hata mesajı göster
-                email.error = "Geçersiz e-posta formatı"
-            }
-
+            // Alan kontrolü
             validateField(name, "Ad alanı boş olamaz")
             validateField(surname, "Soyad alanı boş olamaz")
             validateField(tc, "TC Kimlik No alanı boş olamaz")
@@ -144,32 +192,42 @@ class SignUp : AppCompatActivity() {
             validateField(officeNumber, "Büro No alanı boş olamaz")
             validateField(registrationNumber, "Sicil No alanı boş olamaz")
 
-            // Spinner kontrolü (Seçiniz seçeneği seçilmişse hata ver)
-            if (citySpinner.selectedItemPosition == 0) {
-                (citySpinner.selectedView as? TextView)?.error = "Baro il seçmelisiniz"
+            // Şifre doğrulama
+            if (password.text.toString() != passwordRepeat.text.toString()) {
+                validateField(passwordRepeat, "Parola uyuşmuyor!!")
+                Toast.makeText(this, "Şifreler uyuşmuyor!", Toast.LENGTH_SHORT).show()
                 isValid = false
             }
 
-            if (specializationSpinner.selectedItemPosition == 0) {
-                (specializationSpinner.selectedView as? TextView)?.error = "Uzmanlık alanı seçmelisiniz"
+            // Spinner kontrolü
+            if (itemSpinnerCity.selectedItemPosition == 0) {
+                (itemSpinnerCity.selectedView as? TextView)?.error = "Baro il seçmelisiniz"
                 isValid = false
             }
 
-            if(password.text.toString() != passwordRepeat.text.toString()){
-                Toast.makeText(this, "Şifreler Uyuşmuyor! $password,$passwordRepeat", Toast.LENGTH_SHORT).show()
-                validateField(password, "Tekrar giriniz!")
-                validateField(passwordRepeat, "Tekrar giriniz!")
+            if (itemSpinnerBar.selectedItemPosition == 0) {
+                (itemSpinnerBar.selectedView as? TextView)?.error = "Uzmanlık alanı seçmelisiniz"
+                isValid = false
+            }
 
-            }else{
-                if (isValid) {
-                    getRegisterLawyer()
-                    Toast.makeText(this, "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
-                }
+            if (!isPasswordStrong(password.text.toString())){
+                validateField(password,"Şifrenizde en 1 özel karakter ve 1 rakam içermelidir!")
+                Toast.makeText(this, "Şifrenizde en 1 özel karakter ve 1 rakam içermelidir!", Toast.LENGTH_LONG).show()
+                isValid = false
+            }
+
+            // Tüm doğrulamalar geçildiyse
+            if (isValid) {
+                getRegisterLawyer()
+                Toast.makeText(this, "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
+    }
+    private fun validateField(editText: EditText, errorMessage: String) {
+        if (editText.text.toString().trim().isEmpty()) {
+            editText.error = errorMessage
+            isValid = false
+        }
     }
     class CustomSpinnerAdapter(context: Context, resource: Int, objects: List<String>) :
         ArrayAdapter<String>(context, resource, objects) {
@@ -194,28 +252,8 @@ class SignUp : AppCompatActivity() {
         layoutParams.bottomMargin = margin
         loginLayoutT.layoutParams = layoutParams
     }
-
-    fun getNextLawyerId(callback: (Int) -> Unit){
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("Lawyers")
-            .orderBy("lawyerId", Query.Direction.DESCENDING)
-            .limit(1)
-            .get()
-            .addOnSuccessListener { documents ->
-                val lastId = if(!documents.isEmpty){
-                    documents.documents[0].getLong("lawyerId")?.toInt() ?: 0
-                } else {
-                    0
-                }
-                callback(lastId + 1)
-            }
-            .addOnFailureListener { e ->
-                callback(1)
-            }
-    }
     //FirebaseAuth Add
-    fun getRegisterLawyer() {
+    private fun getRegisterLawyer() {
         val name = findViewById<EditText>(R.id.RegisterName).text.toString().trim()
         val surname = findViewById<EditText>(R.id.RegisterSurname).text.toString().trim()
         val tc = findViewById<EditText>(R.id.RegisterTC).text.toString().trim()
@@ -245,7 +283,7 @@ class SignUp : AppCompatActivity() {
         registerLawyer(email, password, name, surname, phone, city, specialization, officeNo, registrationNo, tc)
     }
 
-    fun registerLawyer(
+    private fun registerLawyer(
         email: String,
         password: String,
         name: String,
@@ -305,52 +343,13 @@ class SignUp : AppCompatActivity() {
             }
     }
 
-    //FirebaseDatabase Add
-    fun getRegisterLawyerFirst(){
-        val name = findViewById<EditText>(R.id.RegisterName).text.toString()
-        val surname = findViewById<EditText>(R.id.RegisterSurname).text.toString()
-        val tc = findViewById<EditText>(R.id.RegisterTC).text.toString()
-        val phone = findViewById<EditText>(R.id.RegisterPhone).text.toString()
-        val email = findViewById<EditText>(R.id.RegisterEmail).text.toString()
-        val password = findViewById<EditText>(R.id.RegisterPassword).text.toString()
-        val passwordRepeat = findViewById<EditText>(R.id.RegisterPasswordRepeat).text.toString()
-        val officeNo = findViewById<EditText>(R.id.RegisterOfficeNumber).text.toString()
-        val registrationNo = findViewById<EditText>(R.id.RegisterRegistrationNumber).text.toString()
-        val city = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerCity).selectedItem.toString()
-        val specialization = findViewById<Spinner>(R.id.RegisterSpecializationSpinnerBar).selectedItem.toString()
+    private fun isPasswordStrong(password: String): Boolean{
+        if(password.length < 8)
+            return false
+        val hasDigit = password.any{ it.isDigit() }
+        val hasSpecialChar = password.any { !it.isLetterOrDigit() }
 
-        val database = FirebaseDatabase.getInstance()
-        val reference = database.getReference("LawyersTable")
-
-        val lawyerId = reference.push().key ?: return
-
-        val lawyer = hashMapOf(
-            "lawyerId" to lawyerId,
-            "name" to name,
-            "surname" to surname,
-            "password" to password,
-            "tc" to tc,
-            "phone" to phone,
-            "email" to email,
-            "officeNumber" to officeNo,
-            "registrationNumber" to registrationNo,
-            "city" to city,
-            "specialization" to specialization
-        )
-
-        reference.child(lawyerId).setValue(lawyer)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Kayıt başarılı! ID: $lawyerId", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this,LogIn::class.java)
-                startActivity(intent)
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Hata: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun isValidEmail(email: String) : Boolean{
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return hasDigit && hasSpecialChar
     }
 
 }

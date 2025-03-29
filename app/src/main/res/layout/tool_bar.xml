@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ToolBar"
-    android:layout_marginTop="10dp">
+    android:id="@+id/ToolBar">
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:gravity="center" />
 
                 <LinearLayout
-                    android:id="@+id/ToolBarLogout"
+                    android:id="@+id/ToolBarMenu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -73,7 +73,7 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/logout_24px"
+                        android:src="@drawable/menu_c"
                         android:scaleType="fitCenter"
                         android:contentDescription="Çıkış"
                         app:tint="@color/black"/>

@@ -1,7 +1,9 @@
 package com.acelya.lawyerapp
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
@@ -25,16 +27,17 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
+import androidx.core.net.toUri
 
 class Home : AppCompatActivity() {
+    lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
 
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayoutHome)
-        val settingButton = findViewById<ImageButton>(R.id.HomeSettingImageButton)
+        drawerLayout = findViewById(R.id.drawerLayoutHome)
         val navigationView = findViewById<NavigationView>(R.id.navigationViewHome)
         val menuLanguageOption = navigationView?.menu?.findItem(R.id.nav_language)
         val caseManagement = findViewById<CardView>(R.id.CaseManagementCardView)
@@ -42,6 +45,8 @@ class Home : AppCompatActivity() {
         val calender = findViewById<CardView>(R.id.CalenderCardView)
         val clientManagement = findViewById<CardView>(R.id.ClientManagement)
         val finance = findViewById<CardView>(R.id.FinanceCardView)
+        val btnOpenEmail = findViewById<ImageButton>(R.id.HomeEmailImageButton)
+        val settingButton = findViewById<ImageButton>(R.id.HomeSettingImageButton)
 
         // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Ana sayfa"
@@ -60,15 +65,6 @@ class Home : AppCompatActivity() {
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
-//        // Çıkış butonunun tıklanması için event dinleyicisi ekle
-//        toolbarLogoutLayout?.setOnClickListener {
-//            FirebaseAuth.getInstance().signOut()
-//            Toast.makeText(this, "Çıkış yapıldı!", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this, LogIn::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
-//            finish()
-//        }
         caseManagement.setOnClickListener {
             val intent = Intent(this@Home,CaseManagement::class.java)
             intent.putExtra("lawyerId",lawyerId)
@@ -102,7 +98,11 @@ class Home : AppCompatActivity() {
 
 
         settingButton.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.END)
+            //drawerLayout.openDrawer(GravityCompat.END)
+        }
+
+        btnOpenEmail.setOnClickListener {
+            openEmailApp()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -124,10 +124,27 @@ class Home : AppCompatActivity() {
         }
     }
 
+    fun openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.END)
+    }
+
     private fun showLanguageMenu(view: View) {
         val popup = PopupMenu(this, view)
         popup.menuInflater.inflate(R.menu.language_menu, popup.menu)
         popup.show()
+    }
+
+    private fun openEmailApp() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = "mailto:".toUri()
+            setPackage("com.google.android.gm")
+        }
+
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Gmail uygulaması bulunamadı!", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

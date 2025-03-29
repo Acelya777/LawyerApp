@@ -32,103 +32,259 @@
                         android:textColor="@color/logText"
                         android:layout_gravity="center"
                         android:layout_marginBottom="24dp"/>
-                    <EditText
-                        android:id="@+id/RegisterName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Ad"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
 
-                    <EditText
-                        android:id="@+id/RegisterSurname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Soyad"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
 
-                    <EditText
-                        android:id="@+id/RegisterTC"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="TC Kimlik No"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="number"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/RegisterPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Telefon"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="phone"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Adı"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
 
-                    <EditText
-                        android:id="@+id/RegisterEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="E-posta"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="textEmailAddress"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                        <EditText
+                            android:id="@+id/RegisterName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Ad"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
 
-                    <EditText
-                        android:id="@+id/RegisterPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Parola"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="textPassword"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
-                    <EditText
-                        android:id="@+id/RegisterPasswordRepeat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Parola Tekrarı"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="textPassword"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                    </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/RegisterOfficeNumber"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Büro No"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="number"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/RegisterRegistrationNumber"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Soyadı"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterSurname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Soyad"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="textPersonName"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sicil No"
-                        android:padding="12dp"
-                        android:background="@android:drawable/edit_text"
-                        android:inputType="number"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="12dp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. TC"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterTC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="TC Kimlik No"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="number"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Telefon"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Telefon"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="phone"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Email"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="E-posta"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="textEmailAddress"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Parola"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white" />
+
+                        <EditText
+                            android:id="@+id/RegisterPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Parola"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="textPassword"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Parola Tekrarı"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterPasswordRepeat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Parola Tekrarı"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="textPassword"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Ofis Numarası"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterOfficeNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Büro No"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="number"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Av. Sicil Numarası"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:id="@+id/RegisterRegistrationNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Sicil No"
+                            android:textColor="@color/black"
+                            android:padding="12dp"
+                            android:background="@android:drawable/edit_text"
+                            android:inputType="number"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -140,13 +296,18 @@
                             android:layout_height="wrap_content"
                             android:text="Baro İl"
                             android:textSize="16sp"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
 
                         <Spinner
                             android:id="@+id/RegisterSpecializationSpinnerCity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp" />
+                            android:layout_marginBottom="20dp"
+                            android:background="@color/white"
+                            android:textColor="@color/black"
+                            android:popupBackground="@android:color/white" />/>
 
                     </LinearLayout>
 
@@ -160,13 +321,16 @@
                             android:layout_height="wrap_content"
                             android:text="Uzmanlık Alanları"
                             android:textSize="16sp"
+                            android:textColor="@android:color/black"
                             android:layout_marginBottom="8dp"/>
 
                         <Spinner
                             android:id="@+id/RegisterSpecializationSpinnerBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp" />
+                            android:layout_marginBottom="20dp"
+                            android:textColor="@color/black"
+                            android:popupBackground="@android:color/white" />
 
                     </LinearLayout>
 
