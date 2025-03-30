@@ -48,8 +48,11 @@
                         android:layout_height="wrap_content"
                         android:text="Kullanıcı Adı"
                         android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:textColor="@color/black"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:textStyle="italic"/>
                 </LinearLayout>
 
                 <TextView
@@ -58,9 +61,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:text="Bulunulan Sayfa"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textStyle="bold"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
 
                 <LinearLayout
                     android:id="@+id/ToolBarMenu"

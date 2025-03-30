@@ -5,10 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientCaseFile">
+    tools:context=".ClientCaseFile"
+    android:fitsSystemWindows="true"
+    android:background="@color/case_pink">
+    <include
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="5dp"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
             android:orientation="vertical"
@@ -22,130 +33,251 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/face_4_24px"
-                    android:layout_marginEnd="16dp"/>
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:src="@drawable/face_4_24px"
+                        android:layout_marginEnd="16dp"/>
+                </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="13">
 
                     <TextView
+                        android:id="@+id/tvNameClientCase"
                         android:text="Mehmet Yılmaz"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/tvCaseTypeClientCase"
                         android:text="Ticaret Hukuku"
                         android:textSize="14sp"
+                        android:layout_marginTop="5dp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"/>
                 </LinearLayout>
 
-                <TextView
-                    android:text="Aktif Dava"
-                    android:textColor="#00AA00"
-                    android:layout_gravity="end"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tvStatusClientCase"
+                        android:text="Aktif Dava"
+                        android:textColor="#00AA00"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginVertical="10dp"/>
             <!-- Müvekkil Bilgileri -->
-            <TextView
-                android:text="Müvekkil Bilgileri"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-
-            <TextView
-                android:text="Ad Soyad: Mehmet Yılmaz -\nTelefon: 0555 123 4567 -\nE-posta: mehmetyilmaz@example.com"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-
-            <!-- Dava Süreçleri -->
-            <TextView
-                android:text="Dava Süreçleri"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-
-            <TextView
-                android:text="10 Aralık 2024: İhtarname gönderildi\n15 Aralık 2024: İlk duruşma yapıldı\n5 Ocak 2025: Duruşma tarihi"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-
-            <!-- Belgeler -->
-            <TextView
-                android:text="Belgeler"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+                <TextView
+                    android:text="Müvekkil Bilgileri"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"/>
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/tvPhoneClientCase"
+                    android:text="Telefon Bilgisi:"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="İhtarname.pdf" />
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/black"/>
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/upload_file_24px" />
+                <TextView
+                    android:id="@+id/tvEmailClientCase"
+                    android:text="Email Bilgisi:"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/black"/>
 
+                <TextView
+                    android:id="@+id/tvAddressClientCase"
+                    android:text="Adres Bilgisi:"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/black"/>
             </LinearLayout>
-
-            <!-- İşlemler -->
-            <TextView
-                android:text="İşlemler"
-                android:textStyle="bold"
-                android:layout_marginTop="24dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray"
+                android:layout_marginVertical="10dp"/>
+            <!-- Dava Süreçleri -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+                <TextView
+                    android:text="Dava Süreçleri"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"/>
 
-            <Button
-                android:text="Yeni Belge Ekle"
+                <TextView
+                    android:id="@+id/tvCaseInfoClientCase"
+                    android:text="DavaBilgileri"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:text="Yüklü Belge"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray"
+                android:layout_marginVertical="10dp"/>
+            <!-- Belgeler -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+                <TextView
+                    android:text="Belgeler"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"/>
 
+                <LinearLayout
+                    android:id="@+id/lineCaseFileClientCase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tvCaseFileClientCase"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="İhtarname.pdf"
+                        android:textColor="@color/black"/>
+
+                    <ImageView
+                        android:id="@+id/ivCaseFileDeleteClientCase"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/delete_c"
+                        android:layout_marginRight="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/ivCaseFileDownloadClientCase"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/download_c" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray"
+                android:layout_marginVertical="10dp"/>
+            <!-- İşlemler -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+                <TextView
+                    android:text="İşlemler"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btnNewFileClientCase"
+                        android:text="Yeni Belge Ekle"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+
+                    <Button
+                        android:id="@+id/btnAddInterViewDate"
+                        android:text="Duruşma Tarihi Ekle"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray"
+                android:layout_marginVertical="10dp"/>
             <!-- Alt Butonlar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="end"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="25dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
+                </LinearLayout>
                 <Button
+                    android:id="@+id/btnSaveClientCase"
                     android:text="Kaydet"
                     android:backgroundTint="#00AA00"
                     android:textColor="#FFFFFF"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
-
-                <Button
-                    android:text="Duruşma Tarihi Ekle"
-                    android:layout_marginStart="8dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="50dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

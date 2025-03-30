@@ -48,12 +48,15 @@ class Calendar : AppCompatActivity() {
 
         val localActivity = "Takvim"
         val name = intent.getStringExtra("name")
+        val surname = intent.getStringExtra("surname")
+        val lawyerId = intent.getStringExtra("lawyerId")
 
         //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
             val fragment = ToolbarFragment()
             val bundle = Bundle()
             bundle.putString("name", name)
+            bundle.putString("surname", surname)
             bundle.putString("locatedActivity",localActivity)
             fragment.arguments = bundle
 

@@ -31,20 +31,22 @@ class CaseManagement : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Dosya Yönetimi"
         val name = intent.getStringExtra("name")
+        val surname = intent.getStringExtra("surname")
         val lawyerId = intent.getStringExtra("lawyerId")
 
         drawerLayout = findViewById(R.id.drawerLayoutCase)
-        clientAdapter = ClientAdapter(clientList,lawyerId,name)
+        clientAdapter = ClientAdapter(clientList,lawyerId,name,surname)
         recyclerView.adapter = clientAdapter
-
 
         //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
             val fragment = ToolbarFragment()
             val bundle = Bundle()
             bundle.putString("name", name)
+            bundle.putString("surname", surname)
             bundle.putString("locatedActivity",localActivity)
             fragment.arguments = bundle
 

@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class ClientAdapter(private var clientList: MutableList<Client>,private val lawyerId:String?,private val name:String?) :
+class ClientAdapter(private var clientList: MutableList<Client>,private val lawyerId:String?,private val name:String?,private val surname:String?) :
     RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
 
     class ClientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -65,6 +65,9 @@ class ClientAdapter(private var clientList: MutableList<Client>,private val lawy
                                 case?.let {
                                     val intent = Intent(holder.itemView.context, ClientCaseFile::class.java)
                                     intent.putExtra("caseId", it.caseId)
+                                    intent.putExtra("name", name)
+                                    intent.putExtra("surname", surname)
+                                    intent.putExtra("lawyerId", lawyerId)
                                     holder.itemView.context.startActivity(intent)
                                     return  // İlk bulduğumuz dava için yönlendirme yaptık, döngüyü bitir
                                 }

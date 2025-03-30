@@ -13,12 +13,15 @@ class ContratManagement : AppCompatActivity() {
         setContentView(R.layout.activity_contrat_management)
         val localActivity = "Sözleşme Yönetimi"
         val name = intent.getStringExtra("name")
+        val surname = intent.getStringExtra("surname")
+        val lawyerId = intent.getStringExtra("lawyerId")
 
         //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
             val fragment = ToolbarFragment()
             val bundle = Bundle()
             bundle.putString("name", name)
+            bundle.putString("surname", surname)
             bundle.putString("locatedActivity",localActivity)
             fragment.arguments = bundle
 

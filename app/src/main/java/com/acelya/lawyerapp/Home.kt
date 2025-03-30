@@ -51,6 +51,7 @@ class Home : AppCompatActivity() {
         // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Ana sayfa"
         val name = intent.getStringExtra("name")
+        val surname = intent.getStringExtra("surname")
         val lawyerId = intent.getStringExtra("lawyerId")
 
         //ToolBarFragment toolbar başlıkları gönderme
@@ -58,6 +59,7 @@ class Home : AppCompatActivity() {
             val fragment = ToolbarFragment()
             val bundle = Bundle()
             bundle.putString("name", name)
+            bundle.putString("surname", surname)
             bundle.putString("locatedActivity",localActivity)
             fragment.arguments = bundle
 
@@ -69,30 +71,35 @@ class Home : AppCompatActivity() {
             val intent = Intent(this@Home,CaseManagement::class.java)
             intent.putExtra("lawyerId",lawyerId)
             intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
             startActivity(intent)
         }
         contratManagement.setOnClickListener {
             val intent = Intent(this@Home,ContratManagement::class.java)
             intent.putExtra("lawyerId",lawyerId)
             intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
             startActivity(intent)
         }
         calender.setOnClickListener {
             val intent = Intent(this@Home,Calendar::class.java)
             intent.putExtra("lawyerId",lawyerId)
             intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
             startActivity(intent)
         }
         clientManagement.setOnClickListener {
             val intent = Intent(this@Home,ClientManagement::class.java)
             intent.putExtra("lawyerId",lawyerId)
             intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
             startActivity(intent)
         }
         finance.setOnClickListener {
             val intent = Intent(this@Home,Finance::class.java)
             intent.putExtra("lawyerId",lawyerId)
             intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
             startActivity(intent)
         }
 

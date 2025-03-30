@@ -62,6 +62,21 @@ class CreateCaseFile : AppCompatActivity() {
         // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Dosya Oluşturma"
         val name = intent.getStringExtra("name")
+        val surname = intent.getStringExtra("surname")
+
+        //ToolBarFragment toolbar başlıkları gönderme
+        if (savedInstanceState == null) {
+            val fragment = ToolbarFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("surname", surname)
+            bundle.putString("locatedActivity",localActivity)
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+        }
 
         //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
@@ -114,7 +129,7 @@ class CreateCaseFile : AppCompatActivity() {
                 val keypadHeight = screenHeight - rect.bottom
 
                 if (keypadHeight > screenHeight * 0.15) {
-                    adjustScrollViewMargin(1200)
+                    adjustScrollViewMargin(1000)
                 } else {
                     adjustScrollViewMargin(150)
                 }
@@ -273,8 +288,8 @@ class CreateCaseFile : AppCompatActivity() {
             "clientId" to clientId,
             "lawyerId" to lawyerId,
             "startDate" to startDate,
-            "endDate" to if (isOngoing) "Dava devam ediyor..." else endDate,
-            "status" to if (isOngoing) "Devam Ediyor" else "Tamamlandı",
+            "endDate" to if (isOngoing) "continue" else endDate,
+            "status" to if (isOngoing) "active" else "passive",
             "notes" to notes,
             "pdfFile" to pdfFileData // 📌 PDF verisi eklendi
         )

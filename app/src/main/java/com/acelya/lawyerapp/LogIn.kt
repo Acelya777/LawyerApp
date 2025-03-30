@@ -106,6 +106,7 @@ class LogIn : AppCompatActivity() {
                     if (email == emailInput && password == passwordInput) {
                         found = true
                         val name = lawyer.child("name").value.toString()
+                        val surname = lawyer.child("surname").value.toString()
                         val lawyerId = lawyer.child("lawyerId").value.toString()
                         val specialization = lawyer.child("specialization").value.toString()
 
@@ -117,6 +118,7 @@ class LogIn : AppCompatActivity() {
                         editor.putString("lawyerName", name)
                         intent.putExtra("lawyerId", lawyerId)
                         intent.putExtra("name", name)
+                        intent.putExtra("surname", surname)
                         editor.apply()
                         startActivity(intent)
 
