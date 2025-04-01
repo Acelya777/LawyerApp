@@ -52,6 +52,7 @@ class CreateCaseFile : AppCompatActivity() {
     private var clientId: String? = null
     private var lawyerId: String? = null
     private var pdfFileData: HashMap<String, String>? = null
+    val pdfId = FirebaseDatabase.getInstance().reference.push().key ?: ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,21 +63,6 @@ class CreateCaseFile : AppCompatActivity() {
         // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Dosya Oluşturma"
         val name = intent.getStringExtra("name")
-        val surname = intent.getStringExtra("surname")
-
-        //ToolBarFragment toolbar başlıkları gönderme
-        if (savedInstanceState == null) {
-            val fragment = ToolbarFragment()
-            val bundle = Bundle()
-            bundle.putString("name", name)
-            bundle.putString("surname", surname)
-            bundle.putString("locatedActivity",localActivity)
-            fragment.arguments = bundle
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .commit()
-        }
 
         //ToolBarFragment toolbar başlıkları gönderme
         if (savedInstanceState == null) {
@@ -218,12 +204,13 @@ class CreateCaseFile : AppCompatActivity() {
                 val fileName = getFileName(uri)
                 val pdfBase64 = convertPdfToBase64(uri)
 
+
                 pdfFileData = hashMapOf(
+                    "pdfId" to pdfId,
                     "base64Data" to pdfBase64,
                     "fileName" to fileName,
                     "fileType" to "application/pdf"
                 )
-
                 // 📌 Seçilen PDF'nin adını ekranda göster
                 findViewById<TextView>(R.id.pdfNameTextView).text = fileName
                 Toast.makeText(this, "PDF Seçildi: $fileName", Toast.LENGTH_SHORT).show()
@@ -281,6 +268,7 @@ class CreateCaseFile : AppCompatActivity() {
 
         val caseId = reference.push().key ?: return
 
+
         val caseData = hashMapOf(
             "caseId" to caseId,
             "caseName" to caseName,
@@ -291,7 +279,7 @@ class CreateCaseFile : AppCompatActivity() {
             "endDate" to if (isOngoing) "continue" else endDate,
             "status" to if (isOngoing) "active" else "passive",
             "notes" to notes,
-            "pdfFile" to pdfFileData // 📌 PDF verisi eklendi
+            "pdfFile" to  hashMapOf(pdfId to pdfFileData)
         )
 
         reference.child(caseId).setValue(caseData)

@@ -80,7 +80,7 @@ class ClientManagement : AppCompatActivity() {
                 val keypadHeight = screenHeight - rect.bottom
 
                 if (keypadHeight > screenHeight * 0.15) { // Klavye açık
-                    setLayoutMargin(1200)
+                    setLayoutMargin(0)
                 } else {
                     setLayoutMargin(0)
                 }
@@ -121,7 +121,7 @@ class ClientManagement : AppCompatActivity() {
         reference.child(clientId).setValue(client)
             .addOnSuccessListener {
                 Toast.makeText(this, "Kayıt başarılı! ID: $clientId", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this,LogIn::class.java)
+                val intent = Intent(this,Home::class.java)
                 startActivity(intent)
             }
             .addOnFailureListener { e ->

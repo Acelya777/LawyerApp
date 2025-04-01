@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Calendar"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    >
     <include
         layout="@layout/tool_bar" />
     <RelativeLayout
@@ -17,12 +18,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/case_pink">
 
-            <CalendarView
-                android:id="@+id/calendarView"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="18dp"
+                android:layout_margin="10dp">
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.cardview.widget.CardView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,14 +42,16 @@
                     android:text="Etkinlikler"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/tvEvents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Seçilen günün etkinlikleri burada görünecek."
                     android:textSize="16sp"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
             <LinearLayout

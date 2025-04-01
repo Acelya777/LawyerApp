@@ -3,15 +3,19 @@
         <group>
             <item
                 android:id="@+id/nav_profile"
-                android:title="Profil" />
+                android:title="Profil"
+                android:textColor="@color/white"/>
             <item
                 android:id="@+id/nav_settings"
-                android:title="Karanlık Mod" />
+                android:title="Karanlık Mod"
+                android:textColor="@color/white"/>
             <item
                 android:id="@+id/nav_language"
-                android:title="Dil Seçimi" />
+                android:title="Dil Seçimi"
+                android:textColor="@color/white"/>
             <item
                 android:id="@+id/nav_logout"
-                android:title="Çıkış Yap" />
+                android:title="Çıkış Yap"
+                android:textColor="@color/white"/>
         </group>
 </menu>

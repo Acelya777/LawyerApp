@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.acelya.lawyerapp.adapter.ClientAdapter
 import com.acelya.lawyerapp.models.Client
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

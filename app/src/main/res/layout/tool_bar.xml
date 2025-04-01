@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        tools:ignore="MissingConstraints" >
+        android:elevation="20dp"
+        tools:ignore="MissingConstraints">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:elevation="4dp"
+            android:background="#D8D8D8"
             tools:ignore="MissingConstraints">
 
             <LinearLayout
@@ -85,10 +85,7 @@
                         app:tint="@color/black"/>
 
                 </LinearLayout>
-
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
     </FrameLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

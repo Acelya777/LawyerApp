@@ -1,8 +1,8 @@
-package com.acelya.lawyerapp
+package com.acelya.lawyerapp.adapter
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +10,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.acelya.lawyerapp.ClientCaseFile
+import com.acelya.lawyerapp.CreateCaseFile
+import com.acelya.lawyerapp.R
 import com.acelya.lawyerapp.models.CaseFile
 import com.acelya.lawyerapp.models.Client
+import com.acelya.lawyerapp.models.pdfFile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -48,9 +51,11 @@ class ClientAdapter(private var clientList: MutableList<Client>,private val lawy
                     notifyItemRemoved(position)
                     Toast.makeText(holder.itemView.context, "Kullanıcı Silindi", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener {
-                    Toast.makeText(holder.itemView.context, "Silme Hatası", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { error ->
+                    Log.e("FirebaseDelete", "Silme işlemi başarısız: ${error.message}")
+                    Toast.makeText(holder.itemView.context, "Silme Hatası: ${error.message}", Toast.LENGTH_SHORT).show()
                 }
+
         }
 
         holder.btnCaseFile.setOnClickListener {
@@ -68,6 +73,11 @@ class ClientAdapter(private var clientList: MutableList<Client>,private val lawy
                                     intent.putExtra("name", name)
                                     intent.putExtra("surname", surname)
                                     intent.putExtra("lawyerId", lawyerId)
+                                    intent.putExtra("clientName",client.name)
+                                    intent.putExtra("clientSurname",client.surname)
+                                    intent.putExtra("clientPhone",client.phone)
+                                    intent.putExtra("clientEmail",client.email)
+                                    intent.putExtra("clientAddress", client.address)
                                     holder.itemView.context.startActivity(intent)
                                     return  // İlk bulduğumuz dava için yönlendirme yaptık, döngüyü bitir
                                 }

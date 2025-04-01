@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClientCaseFile"
-    android:fitsSystemWindows="true"
-    android:background="@color/case_pink">
+    android:fitsSystemWindows="true">
     <include
         layout="@layout/tool_bar"
         android:layout_width="match_parent"
@@ -19,13 +18,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
-
+        android:layout_marginTop="?attr/actionBarSize"
+        android:backgroundTint="@color/case_pink">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@color/case_pink">
 
             <!-- Profil Bilgileri -->
             <LinearLayout
@@ -76,7 +76,6 @@
                     <TextView
                         android:id="@+id/tvStatusClientCase"
                         android:text="Aktif Dava"
-                        android:textColor="#00AA00"
                         android:layout_gravity="center_vertical|end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -177,30 +176,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <TextView
-                        android:id="@+id/tvCaseFileClientCase"
-                        android:layout_width="0dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/case_pink">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewCaseFile"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="İhtarname.pdf"
-                        android:textColor="@color/black"/>
-
-                    <ImageView
-                        android:id="@+id/ivCaseFileDeleteClientCase"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/delete_c"
-                        android:layout_marginRight="10dp"/>
-
-                    <ImageView
-                        android:id="@+id/ivCaseFileDownloadClientCase"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/download_c" />
-
+                        android:clipToPadding="false"
+                        android:background="@color/case_pink"/>
                 </LinearLayout>
+                <Button
+                    android:id="@+id/btnNewFileClientCase"
+                    android:text="Yeni Belge Ekle"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -216,7 +211,7 @@
                 android:orientation="vertical"
                 android:layout_margin="20dp">
                 <TextView
-                    android:text="İşlemler"
+                    android:text="Görüşmeler"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -225,29 +220,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <Button
-                        android:id="@+id/btnNewFileClientCase"
-                        android:text="Yeni Belge Ekle"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:id="@+id/tvMeetClientDate"
+                        android:text="Görüşme Tarihleri"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"/>
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tvMeetClientDateApprove"
+                        android:text="Tamam/Bekleniyor..."
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/black"/>
 
-                    <Button
-                        android:id="@+id/btnAddInterViewDate"
-                        android:text="Duruşma Tarihi Ekle"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textColor="@color/white"/>
                 </LinearLayout>
+                <Button
+                    android:id="@+id/btnAddInterViewDate"
+                    android:text="Müvekkil ile Görüşme Tarihi Ekle"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
