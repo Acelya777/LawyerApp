@@ -46,7 +46,7 @@ class Home : AppCompatActivity() {
         val clientManagement = findViewById<CardView>(R.id.ClientManagement)
         val finance = findViewById<CardView>(R.id.FinanceCardView)
         val btnOpenEmail = findViewById<ImageButton>(R.id.HomeEmailImageButton)
-        val settingButton = findViewById<ImageButton>(R.id.HomeSettingImageButton)
+
 
         // Intent'ten gelen name değerini alıyoruz
         val localActivity = "Ana sayfa"
@@ -101,11 +101,6 @@ class Home : AppCompatActivity() {
             intent.putExtra("name",name)
             intent.putExtra("surname",surname)
             startActivity(intent)
-        }
-
-
-        settingButton.setOnClickListener {
-            //drawerLayout.openDrawer(GravityCompat.END)
         }
 
         btnOpenEmail.setOnClickListener {

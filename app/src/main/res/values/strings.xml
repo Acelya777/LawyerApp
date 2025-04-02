@@ -9,4 +9,23 @@
     <string name="getAct_textView_getData_title">Title</string>
     <string name="sendAct_Button_sendData">Upload</string>
 
+
+    <!-- Contract Management -->
+    <string name="contract_management_first">Dava Dilekçeleri</string>
+    <string name="contract_management_second">Ceza Hukuku Dilekçeleri</string>
+    <string name="contract_management_third">Kurumsal ve İdari Başvuru Dilekçeleri</string>
+    <string name="contract_management_four">İtiraz ve İstinaf Dilekçeleri</string>
+    <string name="contract_management_five">İdare Hukuku Dilekçeleri</string>
+    <string name="contract_management_six">İcra ve İflas Hukuku Dilekçeleri</string>
+    <string name="contract_management_seven">Özel Amaçlı Dilekçeleri</string>
+
+    <string name="contract_management_subhead_first">Hukuki uyuşmazlıkların çözümü için mahkemelere sunulan resmi belgelerdir.</string>
+    <string name="contract_management_subhead_second">Suç isnatlarına karşı savunma veya şikayet amacıyla hazırlanan dilekçelerdir.</string>
+    <string name="contract_management_subhead_third">Şirketler veya bireylerin kamu kurumlarına yaptıkları resmi başvuruları içerir.</string>
+    <string name="contract_management_subhead_four">Mahkeme kararlarına karşı yapılan hukuki itirazları ve üst mahkemelere başvuruları kapsar.</string>
+    <string name="contract_management_subhead_five">Devlet kurumları ile bireyler arasındaki hukuki sorunların çözümüne yönelik dilekçelerdir.</string>
+    <string name="contract_management_subhead_six">Borç-alacak ilişkileri ve iflas süreçleriyle ilgili hukuki işlemleri düzenler.</string>
+    <string name="contract_management_subhead_seven">Belirli bir hukuki durum veya talep için hazırlanan, genel kategorilere uymayan dilekçelerdir.</string>
+
+
 </resources>

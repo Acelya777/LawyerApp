@@ -197,17 +197,6 @@
                     android:contentDescription="Email"
                     app:tint="@color/black"/>
                 <ImageButton
-                    android:id="@+id/HomeSettingImageButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="5dp"
-                    android:textAlignment="center"
-                    android:src="@drawable/settings_24px"
-                    android:scaleType="centerCrop"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Setting"
-                    app:tint="@color/black"/>
-                <ImageButton
                     android:id="@+id/HomeEmailChatBotButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"

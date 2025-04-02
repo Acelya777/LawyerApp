@@ -132,6 +132,7 @@ class CreateCaseFile : AppCompatActivity() {
             }
             insets
         }
+
         //Pdf buttonun dosyalarından pdf seçmesi
         uploadPdfBtn.setOnClickListener { selectPdfFile() }
         //Create Case File
@@ -186,6 +187,7 @@ class CreateCaseFile : AppCompatActivity() {
         layoutParams.bottomMargin = margin
         binding.scrollView.layoutParams = layoutParams
     }
+
     /**
      * PDF Dosyası Seçme
      */

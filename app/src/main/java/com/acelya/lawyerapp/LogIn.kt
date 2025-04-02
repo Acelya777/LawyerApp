@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -26,6 +27,9 @@ class LogIn : AppCompatActivity() {
     }
     private lateinit var rootView: View
     private lateinit var myLayout: LinearLayout
+    private lateinit var saveBtn: Button
+    val isLogginIn = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,6 +37,9 @@ class LogIn : AppCompatActivity() {
         val LawEmail = findViewById<EditText>(R.id.LawUsername)
         val LawPassword = findViewById<EditText>(R.id.LawPassword)
         val rootView = findViewById<View>(android.R.id.content)
+        saveBtn = findViewById(R.id.LoginScreenUploadButton)
+
+
         rootView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             private val rect = Rect()
 
@@ -51,6 +58,8 @@ class LogIn : AppCompatActivity() {
 
         binding.LoginScreenUploadButton.setOnClickListener {
             var isValid = true
+
+
 
             fun validateField(editText: EditText, errorMessage: String) {
                 if (editText.text.toString().trim().isEmpty()) {
@@ -97,7 +106,7 @@ class LogIn : AppCompatActivity() {
 
         database.get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
-                var found = false  // Avukat bulundu mu?
+                var found = false
 
                 for (lawyer in snapshot.children) {
                     val email = lawyer.child("email").value.toString()
@@ -109,6 +118,8 @@ class LogIn : AppCompatActivity() {
                         val surname = lawyer.child("surname").value.toString()
                         val lawyerId = lawyer.child("lawyerId").value.toString()
                         val specialization = lawyer.child("specialization").value.toString()
+
+                        saveBtn.isEnabled = false
 
                         Toast.makeText(this, "Hoş geldiniz, $name!", Toast.LENGTH_SHORT).show()
 

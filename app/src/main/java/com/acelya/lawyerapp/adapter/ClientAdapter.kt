@@ -43,6 +43,8 @@ class ClientAdapter(private var clientList: MutableList<Client>,private val lawy
         holder.userName.text = "${client.name} ${client.surname}"
         holder.lawCategory.text = client.city
 
+
+
         holder.btnDelete.setOnClickListener {
             val db = FirebaseDatabase.getInstance().getReference("ClientTable")
             db.child(client.clientId).removeValue()

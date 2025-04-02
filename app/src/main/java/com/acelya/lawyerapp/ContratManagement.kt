@@ -3,6 +3,7 @@ package com.acelya.lawyerapp
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -11,6 +12,9 @@ class ContratManagement : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_contrat_management)
+
+        val firstTemplate = findViewById<CardView>(R.id.caseManagementFirstTemplate)
+
         val localActivity = "Sözleşme Yönetimi"
         val name = intent.getStringExtra("name")
         val surname = intent.getStringExtra("surname")
@@ -29,5 +33,11 @@ class ContratManagement : AppCompatActivity() {
                 .replace(R.id.fragment_container, fragment)
                 .commit()
         }
+
+        firstTemplate.setOnClickListener {
+
+        }
+
+
     }
 }
