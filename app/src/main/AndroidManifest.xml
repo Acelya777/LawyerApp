@@ -13,9 +13,11 @@
         android:theme="@style/Theme.LawyerApp"
         tools:targetApi="31">
         <activity
+            android:name=".petitions.DivorcePetitions"
+            android:exported="false" />
+        <activity
             android:name=".petitions.CasePetitions"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -25,7 +27,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
         <activity
             android:name=".CreateCaseFile"
             android:exported="false" />

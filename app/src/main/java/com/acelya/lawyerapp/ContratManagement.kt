@@ -1,11 +1,13 @@
 package com.acelya.lawyerapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.acelya.lawyerapp.petitions.CasePetitions
 
 class ContratManagement : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +37,11 @@ class ContratManagement : AppCompatActivity() {
         }
 
         firstTemplate.setOnClickListener {
-
+            val intent = Intent(this@ContratManagement, CasePetitions::class.java)
+            intent.putExtra("lawyerId",lawyerId)
+            intent.putExtra("name",name)
+            intent.putExtra("surname",surname)
+            startActivity(intent)
         }
 
 

@@ -103,6 +103,7 @@ class LogIn : AppCompatActivity() {
         }
 
         val database = FirebaseDatabase.getInstance().reference.child("LawyersTable")
+        FirebaseDatabase.getInstance().purgeOutstandingWrites()
 
         database.get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {

@@ -248,7 +248,6 @@ class ClientCaseFile : AppCompatActivity() {
                 val fileName = getFileName(uri)
                 Toast.makeText(this, "PDF Seçildi: $fileName", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 }

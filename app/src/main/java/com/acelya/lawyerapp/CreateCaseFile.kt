@@ -146,11 +146,11 @@ class CreateCaseFile : AppCompatActivity() {
             clientId = intent.getStringExtra("clientId")
             lawyerId = intent.getStringExtra("lawyerId")
 
-                saveCaseToRealtimeDatabase(
-                    caseName, caseType,
-                    clientId!!, lawyerId!!, startDate,
-                    endDate, notes, isOngoing
-                )
+            saveCaseToRealtimeDatabase(
+                caseName, caseType,
+                clientId!!, lawyerId!!, startDate,
+                endDate, notes, isOngoing
+            )
 
 
         }
@@ -270,6 +270,22 @@ class CreateCaseFile : AppCompatActivity() {
 
         val caseId = reference.push().key ?: return
 
+        val currentDate = Calendar.getInstance().time
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val parsedEndDate = try {
+            dateFormat.parse(endDate)
+        } catch (e: Exception) {
+            null // Handle invalid date format gracefully
+        }
+
+        val status = when {
+            isOngoing -> "active" // If the case is ongoing, it's active
+            parsedEndDate != null && parsedEndDate.after(currentDate) -> "active" // If the endDate is in the future, it's active
+            else -> "passive" // Otherwise, it's passive
+        }
+
+        val endDateToStore = if (isOngoing) "continue" else endDate
 
         val caseData = hashMapOf(
             "caseId" to caseId,
@@ -278,10 +294,10 @@ class CreateCaseFile : AppCompatActivity() {
             "clientId" to clientId,
             "lawyerId" to lawyerId,
             "startDate" to startDate,
-            "endDate" to if (isOngoing) "continue" else endDate,
-            "status" to if (isOngoing) "active" else "passive",
+            "endDate" to endDateToStore,
+            "status" to status,
             "notes" to notes,
-            "pdfFile" to  hashMapOf(pdfId to pdfFileData)
+            "pdfFile" to hashMapOf(pdfId to pdfFileData)
         )
 
         reference.child(caseId).setValue(caseData)

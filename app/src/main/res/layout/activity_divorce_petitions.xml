@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".petitions.DivorcePetitions"
+    android:fitsSystemWindows="true"
+    android:background="@color/case_pink">
+        <include
+            layout="@layout/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <ScrollView
+            android:id="@+id/divorcePetitionsScrolView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical"
+            android:background="@color/background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/paginationLayout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:id="@+id/divorcePetitionsLinearLayout">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Boşanma Dilekçesi"
+                    android:layout_marginTop="5dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/logText"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="24dp"/>
+
+                <!--Claimant-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davacı Adı"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/claimant_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davacı Adı"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davacı Soyadı"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/claimant_surname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davacı Soyadı"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davacı Adres"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/claimant_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davacı Adres"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <!--Respondent-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davalı Adı"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/respondent_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davalı Adı"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davalı Soyadı"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/respondent_surname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davalı Soyadı"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Davalı Adres"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/respondent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Davalı Adres"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Evlilik Tarihi"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/marriage_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Evlilik Tarihi"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Çocuk Durumu"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/child_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Çocuk Durumu"
+                        android:textColor="@color/black"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                    <CheckBox
+                        android:id="@+id/checkboxNoChild"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Çocuk yok"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/marriage_date" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Dosyayı İndir"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/logText"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints"
+                    android:layout_marginBottom="50dp"/>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>

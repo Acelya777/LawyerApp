@@ -80,4 +80,5 @@ dependencies {
     implementation(libs.android.mail)
     implementation(libs.android.activation)
 
+    implementation(libs.itext7.core)
 }

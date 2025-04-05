@@ -31,6 +31,7 @@ class ForgotPassword : AppCompatActivity() {
 
     }
     private fun fetchLawyers() {
+        FirebaseDatabase.getInstance().purgeOutstandingWrites()
         val dbRef = FirebaseDatabase.getInstance().getReference("LawyersTable")
         val emailInput = findViewById<EditText>(R.id.editTextEmailForgot)
         val email = emailInput.text.toString().trim()
@@ -71,7 +72,9 @@ class ForgotPassword : AppCompatActivity() {
         }
 
         val subject = "Şifre Sıfırlama Talebi"
-        val message = "Merhaba,\n\nŞifreniz: $password\n\nLütfen güvenliğiniz için şifrenizi değiştirin."
+        val message = "Merhaba,\n\n" +
+                "Şifreniz: $password\n\n" +
+                "Lütfen güvenliğiniz için şifrenizi değiştirin."
 
             EmailSender.sendEmail(email, subject, message) { success, errorMessage ->
                 runOnUiThread {

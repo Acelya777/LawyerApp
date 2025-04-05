@@ -90,7 +90,7 @@ class SignUp : AppCompatActivity() {
                 val keypadHeight = screenHeight - rect.bottom
 
                 if (keypadHeight > screenHeight * 0.15) { // Klavye açık
-                    setLayoutMargin(1200)
+                    setLayoutMargin(0)
                 } else {
                     setLayoutMargin(0)
                 }
@@ -246,12 +246,14 @@ class SignUp : AppCompatActivity() {
             return view
         }
     }
+
     private fun setLayoutMargin(margin: Int) {
         val loginLayoutT = findViewById<LinearLayout>(R.id.RegisterLayout)
         val layoutParams = loginLayoutT.layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.bottomMargin = margin
         loginLayoutT.layoutParams = layoutParams
     }
+
     //FirebaseAuth Add
     private fun getRegisterLawyer() {
         val name = findViewById<EditText>(R.id.RegisterName).text.toString().trim()
@@ -297,6 +299,8 @@ class SignUp : AppCompatActivity() {
     ) {
         val auth = FirebaseAuth.getInstance()
         val database = FirebaseDatabase.getInstance().reference.child("LawyersTable")
+        FirebaseAuth.getInstance().firebaseAuthSettings.setAppVerificationDisabledForTesting(false)
+        FirebaseDatabase.getInstance().purgeOutstandingWrites()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
